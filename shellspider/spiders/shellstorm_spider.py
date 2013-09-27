@@ -1,6 +1,7 @@
 import hashlib
 import json
 import os
+import urllib
 
 from beautiful_soup import BeautifulSoup as bs
 from scrapy.http import Request
@@ -17,7 +18,7 @@ class shellstormSpider(BaseSpider):
     url=""
     def save_as_file(self, response,filename):
         sha1_response = response.url
-        folder = PATH + '/' + sha1_response
+        folder = PATH + '/' + urllib.unquote(sha1_response)
         if response.url[-1]=="/":
             if not os.path.exists(folder):
                 os.makedirs(folder)
